@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { v4 as uuidv4 } from 'uuid';
 const Formulario = () => {
 
     //Crear State de Citas
@@ -26,12 +27,23 @@ const Formulario = () => {
     //Cuando el usuario presiona agregar cita
     const submitCita = (e) => {
         e.preventDefault()
+
         //Validar
+
         if(mascota.trim() ==='' || propietario.trim() ==='' || fecha.trim() ==='' || hora.trim() ==='' || sintomas.trim() ===''){
             actualizarError(true)
             return
         }
+
+        //Eliminar el mensaje previo
+        actualizarError(false)
+
         //Asignar un ID
+        actualizarCita({
+            ...cita,
+            id:uuidv4()
+        })
+        console.log(cita)
         //Crear la cita
         //Reiniciar el form
     }
