@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { v4 as uuidv4 } from 'uuid';
-
+import PropTypes from 'prop-types'
 
 const Formulario = ({crearCita}) => {
 
@@ -10,8 +10,7 @@ const Formulario = ({crearCita}) => {
         propietario:'',
         fecha:'',
         hora:'',
-        sintomas:'',
-        id:''
+        sintomas:''
     })
 
     const [error, actualizarError] = useState(false)
@@ -42,13 +41,18 @@ const Formulario = ({crearCita}) => {
         actualizarError(false)
 
         //Asignar un ID
-        actualizarCita({
-            ...cita,
-            id:uuidv4()
-        })
+        cita.id = uuidv4()
         //Crear la cita
         crearCita(cita)
         //Reiniciar el form
+        actualizarCita({
+            mascota:'',
+            propietario:'',
+            fecha:'',
+            hora:'',
+            sintomas:''
+        })
+
     }
     return (
         <>
@@ -109,5 +113,9 @@ const Formulario = ({crearCita}) => {
         </>
     );
 };
+
+Formulario.propTypes = {
+    crearCita: PropTypes.func.isRequired
+}
 
 export default Formulario;
